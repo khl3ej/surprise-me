@@ -1,0 +1,32 @@
+<!-- index.html-->
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/button.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/typed.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+  <div class="jumbotron">
+    <h1>Dad Jokes are Awesome</h1>
+    <div id="typed-strings" class="typed-strings">
+      <!-- <p><strong>Wanna hear a dad joke?</strong></p> -->
+      <p><strong>"{{joke}}"</strong></p>
+      <p><strong>"{{punchline}}"</strong></p>
+    </div>
+    <span id="typed"></span>
+    <script>
+      var typed = new Typed('#typed', {
+        stringsElement: '#typed-strings',
+        typeSpeed: 25,
+        backSpeed: 25,
+        loop: true
+      });
+    </script>
+  </div>
+</body>
+</html>
+{% endblock %}
