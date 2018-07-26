@@ -3,10 +3,7 @@
 <html lang="en">
   <head>
     <title>{% block title %}{% endblock %}</title>
-    <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
@@ -15,14 +12,11 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation"><a href="/">Home</a></li>
-            <li role='presentation'><a href='https://en.wikipedia.org/wiki/Dad_joke'>Learn More</a></li>
           </ul>
         </nav>
       </div>
       {% block body %}
       {% endblock %}
-      <div class='main-page-container' style='height: 500px; width: 100px;'>
-      </div>
       <footer class="footer">
         <p>© 2018 Kenny Le</p>
       </footer>

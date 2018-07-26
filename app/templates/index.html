@@ -5,27 +5,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type="text/javascript" src="{{ url_for('static', filename='lib/button.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='lib/typed.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 </head>
 <body>
-  <div class="jumbotron">
-    <h1>Dad Jokes are Awesome</h1>
-    <div id="typed-strings" class="typed-strings">
-      <!-- <p><strong>Wanna hear a dad joke?</strong></p> -->
-      <p><strong>"{{joke}}"</strong></p>
-      <p><strong>"{{punchline}}"</strong></p>
-    </div>
-    <span id="typed"></span>
-    <script>
-      var typed = new Typed('#typed', {
-        stringsElement: '#typed-strings',
-        typeSpeed: 25,
-        backSpeed: 25,
-        loop: true
-      });
-    </script>
+  <div class='jumbotron'>
+    <h1> "Surprise Me" <br>Horror Movie Catalog</h1>
+    <form class='threshold-form' action='/movie' method='POST' id='threshold-form'>
+      <label for='time-select' style='margin-top: 10px;'>Year:</label><br>
+      <select name='time-drop-down'>
+        <option value="null"></option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+      </select><br>
   </div>
 </body>
 </html>

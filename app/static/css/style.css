@@ -1,3 +1,15 @@
-.main-page-container {
-  border: 10px solid black;
+h1, p, label {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.threshold-form {
+  margin-bottom: 20px;
+}
+
+.jumbotron {
+  display:table-cell;
+  height: 500px;
+  width: inherit;
+  vertical-align:middle;
+  text-align: center;
 }
