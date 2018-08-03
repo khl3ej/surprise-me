@@ -1,6 +1,6 @@
 <!-- index.html-->
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}{{title}} Plot{% endblock %}
 {% block body %}
 <!DOCTYPE html>
 <html>
@@ -11,20 +11,27 @@
 </head>
 <body>
   <div class="jumbotron">
-    <h1>Dad Jokes are Awesome</h1>
+    {% if image_url == '' %}
+      <a href='{{url}}'><img src='{{ url_for('static', filename='images/no_image_available.jpeg')}}'/></a>
+    {% else %}
+      <a href='{{url}}'><img src='{{image_url}}'/></a>
+    {% endif %}
+    <br><br>
     <div id="typed-strings" class="typed-strings">
-      <p><strong>"{{joke}}"</strong></p>
-      <p><strong>"{{punchline}}"</strong></p>
+      <p><strong>"{{title}}"</strong></p>
+      <p><strong>"Directed by: {{director}}"</strong></p>
     </div>
-    <span id="typed"></span>
+    <span id="typed" style='font-size: 24px;'></span>
+    <br><br>
     <script>
       var typed = new Typed('#typed', {
         stringsElement: '#typed-strings',
-        typeSpeed: 25,
-        backSpeed: 25,
+        typeSpeed: 40,
+        backSpeed: 40,
         loop: true
       });
     </script>
+    <p class='wiki-page-plot' style='font-size: 18px;'>{{content}}</p>
   </div>
 </body>
 </html>
