@@ -1,6 +1,11 @@
-# views.py
+'''
+    File name: views.py
+    Authors: Kenny Le
+    Date created: 7/25/2018
+    Date last modified: 8/8/2018
+    Python Version: 3.6
+'''
 
-# Kenny Le
 # Python application to randomly select and return a movie's title and plot using wikipediaapi
 
 import wikipedia
@@ -10,45 +15,6 @@ import requests
 from bs4 import BeautifulSoup
 from flask import render_template, request
 from app import app
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/movie', methods=['POST', 'GET'])
-def movie():
-    wiki_url = 'https://en.wikipedia.org/wiki/List_of_horror_films_of_'
-    list_of_titles = []
-    titles_and_directors = {}
-    year = ''
-    message = ''
-    check = '(page does not exist)'
-
-    if request.method == 'POST':
-        select = str(request.form.get('time-drop-down'))
-        if select != 'null':
-            year = select
-        else:
-            return render_template('index.html', message='Please select a Year')
-
-    wiki_url = wiki_url + year
-    req = requests.get(wiki_url)
-    soup = BeautifulSoup(req.content, 'lxml')
-    table = soup.find('table', {'class':'wikitable sortable'})
-
-    fill_structures(table, titles_and_directors, check)
-
-    page = get_random_movie(titles_and_directors)
-    title, content = get_title_and_section_content(page[0])
-    url = get_url(page[0])
-    img_url = get_movie_image_url(url, title)
-
-    return render_template('movie.html',
-                            title=title, content=content, director=page[1],
-                            url=url, image_url=img_url)
-
-
-
 
 
 #################### Helper Methods ####################
@@ -76,17 +42,18 @@ def get_random_movie(movies):
     return wiki_page, movies[random_title]
 
 # get movie poster image
-def get_movie_image_url(wiki_page_url, title):
-    ret_url = ''
+def get_movie_image_file(wiki_page_url, title):
+    ret_file = ''
     page_req = requests.get(wiki_page_url)
     page_soup = BeautifulSoup(page_req.content, 'lxml')
     img_links = page_soup.findAll("a", {"class":"image"})
     for img_link in img_links:
         img_src = img_link.img['src']
-        if title[:3] in img_src or 'poster' in img_src or 'Poster' in img_src:
-            ret_url = img_src
+        print(img_src)
+        if 'wikimedia' in img_src or 'poster' in img_src or 'Poster' in img_src:
+            ret_file = img_src
             break
-    return ret_url
+    return ret_file
 
 # parse for movie titles and directors
 def fill_structures(wikitable, var_dict, exist_check):
@@ -119,3 +86,39 @@ def fill_structures(wikitable, var_dict, exist_check):
 
         end_substring = '">'
         first_letter_of_title = ''
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/movie', methods=['POST', 'GET'])
+def movie():
+    wiki_url = 'https://en.wikipedia.org/wiki/List_of_horror_films_of_'
+    list_of_titles = []
+    titles_and_directors = {}
+    year = ''
+    message = ''
+    check = '(page does not exist)'
+
+    if request.method == 'POST':
+        select = str(request.form.get('time-drop-down'))
+        if select != 'null':
+            year = select
+        else:
+            return render_template('index.html', message='Please select a Year')
+
+    wiki_url = wiki_url + year
+    req = requests.get(wiki_url)
+    soup = BeautifulSoup(req.content, 'lxml')
+    table = soup.find('table', {'class':'wikitable sortable'})
+
+    fill_structures(table, titles_and_directors, check)
+
+    page = get_random_movie(titles_and_directors)
+    title, content = get_title_and_section_content(page[0])
+    url = get_url(page[0])
+    img_file = get_movie_image_file(url, title)
+
+    return render_template('movie.html',
+                            title=title, content=content, director=page[1],
+                            url=url, image_url=img_file)

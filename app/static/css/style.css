@@ -1,4 +1,16 @@
-h1, p, label, span {
+body {
+  background-color: #2F4F4F;
+}
+
+a {
+  color: #ffffff;
+}
+
+a:hover {
+  color: #2F4F4F;
+}
+
+h1, h2, p, label, span {
   font-family: "Courier New", Courier, monospace;
   }
 

@@ -12,7 +12,7 @@
 <body>
   <div class="jumbotron">
     {% if image_url == '' %}
-      <a href='{{url}}'><img src='{{ url_for('static', filename='images/no_image_available.jpeg')}}'/></a>
+      <a href='{{url}}'><img style='width:220px; height:318px;' src='{{ url_for('static', filename='images/no_image_available.jpeg')}}'/></a>
     {% else %}
       <a href='{{url}}'><img src='{{image_url}}'/></a>
     {% endif %}
