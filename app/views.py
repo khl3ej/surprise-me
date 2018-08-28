@@ -50,7 +50,7 @@ def get_movie_image_file(wiki_page_url, title):
     for img_link in img_links:
         img_src = img_link.img['src']
         print(img_src)
-        if 'wikimedia' in img_src or 'poster' in img_src or 'Poster' in img_src:
+        if 'wikimedia' + title[:3] in img_src or 'poster' in img_src or 'Poster' in img_src:
             ret_file = img_src
             break
     return ret_file
